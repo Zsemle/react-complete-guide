@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -52,25 +53,32 @@ class App extends Component {
 
     if (this.state.showPersons){
       persons = (
+
         <div>
           {this.state.persons.map((person,index) => {
-            return <Person
+            return <ErrorBoundary key={person.id}>
+              <Person
               name={person.name}
               age={person.age}
               click={()=>this.deletePersonHandler(index)}
-              changed={(event)=>this.nameChangedHandler(event,person.id)}
-              key={person.id} />
+              changed={(event)=>this.nameChangedHandler(event,person.id)}/>
+            </ErrorBoundary>
           })}
         </div>
       )
       btnClass = classes.Red;
     }
 
+    const rnd = Math.random();
+    if (rnd > 0.7){
+      throw new Error('Something went wrong');
+    }
+
     return (
         <div className={classes.App}>
           <h1>Hi, I'm a react app</h1>
           <p className={assignedClasses.join(' ')}>This is really working!</p>
-          <button class={btnClass} onClick={() => this.togglePersonsHandler()}>Toggle Persons</button>
+          <button className={btnClass} onClick={() => this.togglePersonsHandler()}>Toggle Persons</button>
           {persons}
         </div>
     );
