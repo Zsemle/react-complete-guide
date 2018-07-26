@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import classes from './Person.css';
 import withClass from '../../../hoc/withClass';
 import Auxi from '../../../hoc/Auxi';
+import PropTypes from 'prop-types';
 
 class Person extends Component{
   constructor(props){
@@ -28,5 +29,12 @@ class Person extends Component{
     //     <p key="3"><input type="text" onChange={this.props.changed} value={this.props.name}/></p>]
   }
 }
+
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  change: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);
