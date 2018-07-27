@@ -36,7 +36,6 @@ class Persons extends PureComponent {
     console.log('[Persons.js] inside render.')
     return this.props.persons.map((person,index) => {
         return <Person
-          authenticated={this.props.isAuthenticated}
           key={person.id}
           position={index}
           ref={this.lastPersonRef}
