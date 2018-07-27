@@ -19,7 +19,8 @@ class App extends PureComponent {
         some: 'other state'
       },
       showPersons: false,
-      toggleClicked: 0
+      toggleClicked: 0,
+      authenticated: false
     }
 
   }
@@ -68,6 +69,10 @@ class App extends PureComponent {
     });
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   render() {
     console.log('[App.js] inside render.')
     let persons = null;
@@ -75,6 +80,7 @@ class App extends PureComponent {
     if (this.state.showPersons){
       persons = (
           <Persons
+            isAuthenticated={this.state.authenticated}
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}/>
@@ -88,7 +94,8 @@ class App extends PureComponent {
             appTitle={this.props.title}
             showPersons={this.state.showPersons}
             persons={this.state.persons}
-            clicked={this.togglePersonsHandler}/>
+            clicked={this.togglePersonsHandler}
+            login={this.loginHandler}/>
           {persons}
         </Auxi>
     );
